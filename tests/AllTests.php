@@ -10,7 +10,25 @@
  * @link      http://code.google.com/p/pearqrcode
  */
 
-require_once 'PHPUnit/Framework.php';
+if ($fp = @fopen('PHPUnit/Autoload.php', 'r', true)) {
+    require_once 'PHPUnit/Autoload.php';
+} elseif ($fp = @fopen('PHPUnit/Framework.php', 'r', true)) {
+    require_once 'PHPUnit/Framework.php';
+} else {
+    die('skip could not find PHPUnit');
+}
+fclose($fp);
+
+// Keep tests from running twice when calling this file directly via PHPUnit.
+$call_main = false;
+if (strpos($_SERVER['argv'][0], 'phpunit') === false) {
+    // Called via php, not PHPUnit.  Pass the request to PHPUnit.
+    if (!defined('PHPUnit_MAIN_METHOD')) {
+        define('PHPUnit_MAIN_METHOD', 'QRCode_AllTests::main');
+        $call_main = true;
+    }
+}
+
 require_once 'Image/QRCode.php';
 require_once 'Image/QRCodeTest.php';
 
@@ -24,8 +42,16 @@ require_once 'Image/QRCodeTest.php';
  * @license   http://www.gnu.org/copyleft/lesser.html LGPL License 2.1
  * @link      http://code.google.com/p/pearqrcode
  */
-class QRCode_AllTests
+class QRCode_AllTests extends PHPUnit_Framework_TestSuite
 {
+    public static function main()
+    {
+        if (!function_exists('phpunit_autoload')) {
+            require_once 'PHPUnit/TextUI/TestRunner.php';
+        }
+        PHPUnit_TextUI_TestRunner::run(self::suite());
+    }
+
     /**
      * suite 
      * 
@@ -39,4 +65,6 @@ class QRCode_AllTests
     }
 }
 
-?>
+if ($call_main) {
+    QRCode_AllTests::main();
+}

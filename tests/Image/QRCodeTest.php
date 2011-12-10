@@ -11,6 +11,9 @@ class Image_QRCodeTest extends PHPUnit_Framework_TestCase
 	   */
 	  public function setUp()
 	  {
+	      if (!extension_loaded('gd')) {
+               $this->markTestSkipped('gd not installed');
+	      }
 	      $this->image_qrcode = new Image_QRCode();
 	  }
 	  
