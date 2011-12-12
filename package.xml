@@ -11,7 +11,7 @@
   <active>yes</active>
  </lead>
  <date>2011-12-12</date>
- <time>10:16:29</time>
+ <time>10:36:58</time>
  <version>
   <release>0.1.2</release>
   <api>0.1.0</api>
@@ -22,8 +22,7 @@
  </stability>
  <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
  <notes>
-Closed #17747 and associated tickets (renames &apos;image&apos; folder to &apos;imagedata&apos; to avoid collision with the main Image folder).
-Fixed the test suite to actually run correctly.
+Closed #17283, #19123.
  </notes>
  <contents>
   <dir baseinstalldir="." name="/">
@@ -367,8 +366,7 @@ First initial release.
    <date>2011-12-12</date>
    <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
    <notes>
-Closed #17747 and associated tickets (renames &apos;image&apos; folder to &apos;imagedata&apos; to avoid collision with the main Image folder).
-Fixed the test suite to actually run correctly.
+Closed #17283, #19123.
    </notes>
   </release>
  </changelog>
