@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Image_QRCode</name>
  <channel>pear.php.net</channel>
  <summary>A QR (2D) barcode image generator.</summary>
@@ -10,8 +10,8 @@
   <email>rich.sage@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2011-01-14</date>
- <time>07:55:43</time>
+ <date>2011-12-12</date>
+ <time>10:16:29</time>
  <version>
   <release>0.1.2</release>
   <api>0.1.0</api>
@@ -306,8 +306,8 @@ Fixed the test suite to actually run correctly.
    <file baseinstalldir="." md5sum="84baa21235131f06fcc3a37f2c8523cd" name="imagedata/qrv38.png" role="data" />
    <file baseinstalldir="." md5sum="9200389ce87424a6936596d77096b5fd" name="imagedata/qrv39.png" role="data" />
    <file baseinstalldir="." md5sum="2ca03320067958a96fe99c28d5d250f3" name="imagedata/qrv40.png" role="data" />
-   <file baseinstalldir="." md5sum="0ec28ca33488c9d400092ad06117ddf2" name="tests/AllTests.php" role="test" />
-   <file baseinstalldir="." md5sum="797c3355250f8ab817c3aba438542679" name="tests/Image/QRCodeTest.php" role="test" />
+   <file baseinstalldir="." md5sum="e496dc67dceddb2bfca160d02ae2444b" name="tests/AllTests.php" role="test" />
+   <file baseinstalldir="." md5sum="20f570ed0b003cd88204194f8bda0345" name="tests/Image/QRCodeTest.php" role="test" />
   </dir>
  </contents>
  <dependencies>
@@ -364,7 +364,7 @@ First initial release.
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2011-01-14</date>
+   <date>2011-12-12</date>
    <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
    <notes>
 Closed #17747 and associated tickets (renames &apos;image&apos; folder to &apos;imagedata&apos; to avoid collision with the main Image folder).
