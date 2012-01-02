@@ -1,5 +1,11 @@
 <?php
 
+// Uncomment the below to test from this source.
+// set_include_path('../..'.PATH_SEPARATOR.get_include_path());
+
+require_once 'PHPUnit/Framework/TestCase.php';
+require_once 'Image/QRCode.php';
+
 class Image_QRCodeTest extends PHPUnit_Framework_TestCase
 {
     public $image_qrcode = null;
