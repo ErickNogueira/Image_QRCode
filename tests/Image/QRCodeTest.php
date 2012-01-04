@@ -183,6 +183,6 @@ class Image_QRCodeTest extends PHPUnit_Framework_TestCase
             "output_type" => "return"
         );
         $gd = $this->image_qrcode->makeCode("Hello, world", $arr);
-        $this->assertType("resource", $gd);
+        $this->assertInternalType("resource", $gd);
     }
 }
