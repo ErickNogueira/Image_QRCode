@@ -386,7 +386,7 @@ class Image_QRCode
             $this->image_path = dirname(__FILE__) . "/../imagedata";
         }
 
-        $this->version = 1;
+        $this->version = 0;
         $this->version_ul = 40;
 
         $this->data_string = "";

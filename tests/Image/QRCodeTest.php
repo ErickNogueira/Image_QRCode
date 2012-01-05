@@ -185,4 +185,19 @@ class Image_QRCodeTest extends PHPUnit_Framework_TestCase
         $gd = $this->image_qrcode->makeCode("Hello, world", $arr);
         $this->assertInternalType("resource", $gd);
     }
+
+    /**
+     * Tests for PEAR bug #19142
+     * https://pear.php.net/bugs/bug.php?id=19142
+     *
+     * @return void
+     */
+    public function testBugReport19142OverflowException()
+    {
+        $arr = array(
+            "output_type" => "return"
+        );
+        $gd = $this->image_qrcode->makeCode("http://www.example.com/php/", $arr);
+        $this->assertInternalType("resource", $gd);
+    }
 }
