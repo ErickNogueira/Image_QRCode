@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Image_QRCode</name>
  <channel>pear.php.net</channel>
  <summary>A QR (2D) barcode image generator.</summary>
@@ -10,10 +10,10 @@
   <email>rich.sage@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2011-12-12</date>
- <time>10:36:58</time>
+ <date>2012-01-05</date>
+ <time>09:19:59</time>
  <version>
-  <release>0.1.2</release>
+  <release>0.1.3</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -22,7 +22,7 @@
  </stability>
  <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
  <notes>
-Closed #17283, #19123.
+Closes #19142, version default was incorrect.
  </notes>
  <contents>
   <dir baseinstalldir="." name="/">
@@ -259,7 +259,7 @@ Closed #17283, #19123.
    <file baseinstalldir="." md5sum="6760f7cdc716b5e4c1a3b246b6413d58" name="data/rsc68.dat" role="data" />
    <file baseinstalldir="." md5sum="2c26ee7ca2d60db61ccae7aa9df72f69" name="doc/index.html" role="doc" />
    <file baseinstalldir="." md5sum="243b725d71bb5df4a1e5920b344b86ad" name="doc/LICENSE" role="data" />
-   <file baseinstalldir="." md5sum="62aefa764e65f0116f0cb4b086e16aeb" name="Image/QRCode.php" role="php">
+   <file baseinstalldir="." md5sum="24dd5bd4697105eb83a56127ff658b39" name="Image/QRCode.php" role="php">
     <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
    </file>
    <file baseinstalldir="." md5sum="186d547ff0f78744f264165a5056de0a" name="Image/QRCode/Exception.php" role="php" />
@@ -306,7 +306,8 @@ Closed #17283, #19123.
    <file baseinstalldir="." md5sum="9200389ce87424a6936596d77096b5fd" name="imagedata/qrv39.png" role="data" />
    <file baseinstalldir="." md5sum="2ca03320067958a96fe99c28d5d250f3" name="imagedata/qrv40.png" role="data" />
    <file baseinstalldir="." md5sum="e496dc67dceddb2bfca160d02ae2444b" name="tests/AllTests.php" role="test" />
-   <file baseinstalldir="." md5sum="20f570ed0b003cd88204194f8bda0345" name="tests/Image/QRCodeTest.php" role="test" />
+   <file baseinstalldir="." md5sum="b78096221339dc85a3530d388eb6fb78" name="tests/Image/QRCodeTest.php" role="test" />
+   <file baseinstalldir="." md5sum="65401868035babe80aee7c884d3b15f7" name="README" role="data" />
   </dir>
  </contents>
  <dependencies>
@@ -367,6 +368,21 @@ First initial release.
    <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
    <notes>
 Closed #17283, #19123.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.3</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2012-01-05</date>
+   <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
+   <notes>
+Closes #19142, version default was incorrect.
    </notes>
   </release>
  </changelog>
