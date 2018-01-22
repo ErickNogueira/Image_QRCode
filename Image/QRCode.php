@@ -121,14 +121,14 @@ class Image_QRCode
     /**
      * base_image
      *
-     * @var gd_image
+     * @var resource
      */
     protected $base_image;
 
     /**
      * output image
      *
-     * @var gd_image
+     * @var resource
      */
     protected $output_image;
 
@@ -366,6 +366,32 @@ class Image_QRCode
     protected $structureappend_originaldata;
 
     /**
+     * @var integer
+     */
+    protected $data_length;
+
+    /**
+     * Error correction code
+     *
+     * @var string
+     */
+    protected $ec;
+
+    /**
+     * Reed-Solomon block order number
+     *
+     * @var integer
+     */
+    private $rs_block_order_num;
+
+    /**
+     * Calculated size of (square) image, in pixels
+     *
+     * @var integer
+     */
+    private $image_size = 132;
+
+    /**
      * Class constructor
      *
      * @param array $options An array of options for the class
@@ -439,7 +465,7 @@ class Image_QRCode
      * Q: 25% error level
      * H: 30% error level
      *
-     * @param char $e the error level to use
+     * @param string $e the error level to use
      *
      * @return void
      * @throws Image_QRCode_Exception
@@ -537,8 +563,8 @@ class Image_QRCode
      * Sets the data to append to the code (experimental)
      *
      * @param array $data an array of elements (n, m, parity, originaldata)
-     *
      * @return void
+     * @throws Image_QRCode_Exception
      */
     protected function setStructureAppend($data = array())
     {
@@ -679,9 +705,10 @@ class Image_QRCode
         // what are we doing with the created output image?
         if ($this->output_type == "return") {
             return $this->output_image;
-        } else {
-            switch ($this->image_type)
-            {
+        }
+
+        switch ($this->image_type)
+        {
             case "jpeg":
                 header("Content-type: image/jpeg");
                 imagejpeg($this->output_image);
@@ -691,7 +718,9 @@ class Image_QRCode
                 header("Content-type: image/png");
                 imagepng($this->output_image);
                 break;
-            }
+
+            default:
+                throw new Image_QRCode_Exception("Image format '{$this->image_type}' not supported'");
         }
     }
 
@@ -863,7 +892,7 @@ class Image_QRCode
         $format_info = $this->readECCData($matrix_remain_bit, $max_codewords);
 
         $codewordsCounter = $this->divideBy8Bit();
-        $codewordsCounter = $this->setPaddingCharacter($codewordsCounter);
+        $this->setPaddingCharacter($codewordsCounter);
 
         // Do the actual RS-ECC magic
         $this->doRSCalculations();
@@ -874,10 +903,10 @@ class Image_QRCode
     /**
      * Read in correct baseline data from ECC/RS files
      *
-     * @param array   $matrix_remain_bit array of remaining bits for data matrix
-     * @param integer $max_codewords     number of maximum codewords
-     *
+     * @param array $matrix_remain_bit array of remaining bits for data matrix
+     * @param integer $max_codewords number of maximum codewords
      * @return array
+     * @throws Image_QRCode_Exception
      */
     protected function readECCData($matrix_remain_bit, $max_codewords)
     {
@@ -939,20 +968,19 @@ class Image_QRCode
 
         /* Set terminator for data */
 
+        if ($this->total_data_bits > $this->max_data_bits) {
+            throw new Image_QRCode_Exception("Overflow exception");
+        }
+
         if ($this->total_data_bits <= $this->max_data_bits-4) {
             $this->data_value[$this->data_counter] = 0;
             $this->data_bits[$this->data_counter] = 4;
-        } else {
-            if ($this->total_data_bits < $this->max_data_bits) {
-                $this->data_value[$this->data_counter] = 0;
-                $this->data_bits[$this->data_counter]
-                    = $this->max_data_bits-$this->total_data_bits;
-            } else {
-                if ($this->total_data_bits > $this->max_data_bits) {
-                    throw new Image_QRCode_Exception("Overflow exception");
-                }
-            }
+
+            return $format_info;
         }
+
+        $this->data_value[$this->data_counter] = 0;
+        $this->data_bits[$this->data_counter] = $this->max_data_bits-$this->total_data_bits;
 
         return $format_info;
     }
@@ -1038,6 +1066,7 @@ class Image_QRCode
                 $flag = $flag * -1;
             }
         }
+
         return $codewordsCounter;
     }
 
@@ -1206,8 +1235,8 @@ class Image_QRCode
     /**
      * Attaches the calculated codeword data to the data matrix
      *
-     * @param integer $max_codewords     Maximum number of codewords for this code
-     * @param integer $matrix_remain_bit Dependant on the version of the code
+     * @param integer $max_codewords   Maximum number of codewords for this code
+     * @param array $matrix_remain_bit Dependant on the version of the code
      *
      * @return void
      */
@@ -1255,6 +1284,7 @@ class Image_QRCode
      */
     protected function maskSelection($max_modules_1side)
     {
+        $mask_number = 0;
         $min_demerit_score = 0;
         $hor_master = "";
         $ver_master = "";
@@ -1375,8 +1405,8 @@ class Image_QRCode
      * Creates the base square image, based on the module size
      *
      * @param integer $max_modules_1side Max number of modules (single side)
-     *
-     * @return integer
+     * @return int
+     * @throws Image_QRCode_Exception
      */
     protected function createBaseImage($max_modules_1side)
     {
