@@ -1440,4 +1440,3 @@ class Image_QRCode
         }
     }
 }
-?>
